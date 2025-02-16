@@ -93,6 +93,17 @@ function generateSelectorSmallArea(selector: string): string{
     let smallAreaName = ""
     let isIncluding = true;
     let isAboveCorrect = false;
+    let isPopulation = false;
+
+    function smallAreaSelector(){
+        if(isPopulation){
+            return `"JINKO" = ${smallAreaName.slice(1,-2)}`
+        }else if(smallAreaName === "NULL"){
+            return `"S_NAME" LIKE '${smallAreaName}${isAboveCorrect ? "" : "%"}'`
+        }else{
+            return `"S_NAME" IS NULL`
+        }
+    }
     while(processingText.length !== 0){
         const beforeProcessedText = processingText;
         processingText = processingText.slice(1)
@@ -103,17 +114,21 @@ function generateSelectorSmallArea(selector: string): string{
             continue
         }
         if(beforeProcessedText.startsWith("[")){
-            returnText += `("S_NAME" LIKE '${smallAreaName}${isAboveCorrect ? "" : "%"}' && (${generateSelectorSmallArea(processingText)})) || `
+            returnText += `(${smallAreaSelector()} && (${generateSelectorSmallArea(processingText)})) || `
             smallAreaName = "";
             isAboveCorrect = false;
             continue;
         }
         if(beforeProcessedText.startsWith("$")){
             isAboveCorrect = true;
-            continue
+            continue;
+        }
+        if(beforeProcessedText.startsWith("人") && smallAreaName.startsWith("人口")){
+            isPopulation = true;
+            continue;
         }
         if(beforeProcessedText.startsWith("・") || beforeProcessedText.startsWith("、") || beforeProcessedText.startsWith(",")){
-            if(smallAreaName) returnText += `("S_NAME" LIKE '${smallAreaName}${isAboveCorrect ? "" : "%"}') || `;
+            if(smallAreaName) returnText += `(${smallAreaSelector()}) || `;
             smallAreaName = "";
             continue
         }
