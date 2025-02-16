@@ -99,9 +99,9 @@ function generateSelectorSmallArea(selector: string): string{
         if(isPopulation){
             return `"JINKO" = ${smallAreaName.slice(1,-2)}`
         }else if(smallAreaName === "NULL"){
-            return `"S_NAME" LIKE '${smallAreaName}${isAboveCorrect ? "" : "%"}'`
-        }else{
             return `"S_NAME" IS NULL`
+        }else{
+            return `"S_NAME" LIKE '${smallAreaName}${isAboveCorrect ? "" : "%"}'`
         }
     }
     while(processingText.length !== 0){
