@@ -87,7 +87,7 @@ function generateSelectorPref(prefdata: { pref: string; cities: string }): strin
 }
 
 let processingText = ""
-function generateSelectorSmallArea(selector: string): string{
+function generateSelectorSmallArea(selector: string, prefix = ""): string{
     processingText = selector;
     let returnText = ""
     let smallAreaName = ""
@@ -101,7 +101,7 @@ function generateSelectorSmallArea(selector: string): string{
         }else if(smallAreaName === "NULL"){
             return `"S_NAME" IS NULL`
         }else{
-            return `"S_NAME" LIKE '${smallAreaName}${isAboveCorrect ? "" : "%"}'`
+            return `"S_NAME" LIKE '${prefix}${smallAreaName}${isAboveCorrect ? "" : "%"}'`
         }
     }
     while(processingText.length !== 0){
@@ -114,7 +114,7 @@ function generateSelectorSmallArea(selector: string): string{
             continue
         }
         if(beforeProcessedText.startsWith("[")){
-            returnText += `(${smallAreaSelector()} AND (${generateSelectorSmallArea(processingText)})) OR `
+            returnText += `(${smallAreaSelector()} AND (${generateSelectorSmallArea(processingText,smallAreaName)})) OR `
             smallAreaName = "";
             isAboveCorrect = false;
             continue;
