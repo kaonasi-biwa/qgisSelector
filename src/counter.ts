@@ -130,6 +130,8 @@ function generateSelectorSmallArea(selector: string, prefix = ""): string{
         if(beforeProcessedText.startsWith("・") || beforeProcessedText.startsWith("、") || beforeProcessedText.startsWith(",")){
             if(smallAreaName) returnText += `(${smallAreaSelector()}) OR `;
             smallAreaName = "";
+            isAboveCorrect = false;
+            isPopulation = false;
             continue
         }
 
