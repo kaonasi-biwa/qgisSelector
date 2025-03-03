@@ -97,7 +97,7 @@ function generateSelectorSmallArea(selector: string, prefix = ""): string{
 
     function smallAreaSelector(){
         if(isPopulation){
-            return `"JINKO" = ${smallAreaName.slice(2,-1)}`
+            return `"JINKO" = ${smallAreaName.slice(2)}`
         }else if(smallAreaName === "NULL"){
             return `"S_NAME" IS NULL`
         }else{
