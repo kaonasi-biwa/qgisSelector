@@ -114,7 +114,7 @@ function generateSelectorSmallArea(selector: string, prefix = ""): string{
             continue
         }
         if(beforeProcessedText.startsWith("[")){
-            returnText += `(${smallAreaSelector()} AND (${generateSelectorSmallArea(processingText,prefix + smallAreaName)})) OR `
+            returnText += `(${smallAreaSelector()} AND (${generateSelectorSmallArea(processingText, prefix + smallAreaName)})) OR `
             smallAreaName = "";
             isAboveCorrect = false;
             continue;
