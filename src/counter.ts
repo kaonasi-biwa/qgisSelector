@@ -127,7 +127,7 @@ function generateSelectorSmallArea(selector: string, prefix = ""): string{
             isPopulation = true;
             continue;
         }
-        if(beforeProcessedText.startsWith("・") || beforeProcessedText.startsWith("、") || beforeProcessedText.startsWith(",")){
+        if(beforeProcessedText.startsWith("・") || beforeProcessedText.startsWith("、") || beforeProcessedText.startsWith(",") || beforeProcessedText.startsWith(" ") ){
             if(smallAreaName) returnText += `(${smallAreaSelector()}) OR `;
             smallAreaName = "";
             isAboveCorrect = false;
