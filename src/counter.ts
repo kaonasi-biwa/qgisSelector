@@ -92,7 +92,7 @@ function generateSelectorSmallArea(selector: string, prefix = ""): string{
     let returnText = ""
     let smallAreaName = ""
     let isIncluding = true;
-    let isAboveCorrect = false;
+        let isAboveCorrect = false;
     let isPopulation = false;
 
     function smallAreaSelector(){
